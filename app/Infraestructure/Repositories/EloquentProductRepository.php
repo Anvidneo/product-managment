@@ -3,6 +3,8 @@
 namespace App\Infraestructure\Repositories;
 
 use App\Core\Entities\Product;
+use App\Core\Entities\Category;
+use App\Core\Entities\ProductsCategories;
 use App\Core\Repositories\ProductRepository;
 
 class EloquentProductRepository implements ProductRepository {
@@ -23,6 +25,8 @@ class EloquentProductRepository implements ProductRepository {
         ]);
 
         $product->save();
+        $this->createproductcategory($product->id, $productData->categories);
+        $product->load('categories');
 
         return $product;
     }
@@ -33,15 +37,36 @@ class EloquentProductRepository implements ProductRepository {
         $product->name = $productData->name;
         $product->price = $productData->price;
         $product->stock = $productData->stock;
+
         $product->save();
+        $product->categories()->detach();
+        $product->categories()->delete();
+        $this->createproductcategory($product->id, $productData->categories);
+        $product->load('categories');
 
         return $product;
+    }
+
+    private function createproductcategory($productId, $categories){
+        foreach ($categories as $key => $value) {
+            $category = Category::findOrFail($value);
+            $productCategory = new ProductsCategories([
+                'product' => $productId,
+                'category' => $category->id
+            ]);
+    
+            $productCategory->save();
+        }
     }
 
     public function delete($id) {
         $product = Product::findOrFail($id);
 
+        $product->categories()->detach();
+        $product->categories()->delete();
+
         $product->delete();
+
         return $product;
     }
 }

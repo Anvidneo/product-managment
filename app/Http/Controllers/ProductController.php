@@ -69,4 +69,18 @@ class ProductController extends Controller
             return response(["message" => 'Internal Server Error', "error" => $th], 500);
         }
     }
+
+    /**
+     * Remove the specified resource from storage.
+     * @param  \App\Models\JsonModel  $jsonModel
+     * @return \Illuminate\Http\Response
+     */
+    public function findByCategoryAndPriceRange(string $category, float $minPrice, float $maxPrice, GetProductByCategoryOrPriceRangeUseCase $useCase)
+    {
+        try {
+            return $useCase->execute($category, $minPrice, $maxPrice);
+        } catch (\Throwable $th) {
+            return response(["message" => 'Internal Server Error', "error" => $th], 500);
+        }
+    }
 }
