@@ -2,6 +2,6 @@
 
 namespace App\Core\Services;
 
-class ProductService {
+class CategoryService {
 
 }
