@@ -4,7 +4,7 @@ namespace App\Application\UseCases\Product;
 
 use App\Core\Repositories\ProductRepository;
 
-class UpdateProductUseCase {
+class GetProductByCategoryOrPriceRangeUseCase {
     private $productRepository;
 
     public function __construct(ProductRepository $productRepository)
@@ -12,7 +12,7 @@ class UpdateProductUseCase {
         $this->productRepository = $productRepository;
     }
 
-    public function execute($id, $product) {
-        return $this->productRepository->update($id, $product);
+    public function execute($filter) {
+        return $this->productRepository->filterByCategoryOrPriceRange($filter);
     }
 }

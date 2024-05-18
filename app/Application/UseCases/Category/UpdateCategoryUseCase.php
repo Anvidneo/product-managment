@@ -12,7 +12,7 @@ class UpdateCategoryUseCase {
         $this->categoryRepository = $categoryRepository;
     }
 
-    public function execute($id, $rolData) {
-        return $this->categoryRepository->update($id, $rolData);
+    public function execute($id, $category) {
+        return $this->categoryRepository->update($id, $category);
     }
 }

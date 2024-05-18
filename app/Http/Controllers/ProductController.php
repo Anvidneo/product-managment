@@ -7,6 +7,7 @@ use App\Application\UseCases\Product\DeleteProductUseCase;
 use App\Application\UseCases\Product\GetAllProductUseCase;
 use App\Application\UseCases\Product\GetProductByIdUseCase;
 use App\Application\UseCases\Product\UpdateProductUseCase;
+use App\Application\UseCases\Product\GetProductByCategoryOrPriceRangeUseCase;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -75,10 +76,10 @@ class ProductController extends Controller
      * @param  \App\Models\JsonModel  $jsonModel
      * @return \Illuminate\Http\Response
      */
-    public function findByCategoryAndPriceRange(string $category, float $minPrice, float $maxPrice, GetProductByCategoryOrPriceRangeUseCase $useCase)
+    public function findByCategoryAndPriceRange(Request $request, GetProductByCategoryOrPriceRangeUseCase $useCase)
     {
         try {
-            return $useCase->execute($category, $minPrice, $maxPrice);
+            return $useCase->execute($request);
         } catch (\Throwable $th) {
             return response(["message" => 'Internal Server Error', "error" => $th], 500);
         }

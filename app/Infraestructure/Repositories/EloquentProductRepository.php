@@ -69,4 +69,16 @@ class EloquentProductRepository implements ProductRepository {
 
         return $product;
     }
+
+    public function filterByCategoryOrPriceRange($filter) {
+        $products = Product::whereHas('categories', function($query) use ($filter) {
+                        $query->where('categories.id', $filter->category);
+                    })
+                    ->orWhereBetween('price', [$filter->minPrice, $filter->maxPrice])
+                    ->get();
+        
+        $products->load('categories');
+        return $products;
+    }
+    
 }

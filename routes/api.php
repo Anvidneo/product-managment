@@ -22,6 +22,7 @@ Route::prefix('product')->group(function () {
     Route::post('', [ProductController::class, 'store']);
     Route::put('/{id}', [ProductController::class, 'update']);
     Route::delete('/{id}', [ProductController::class, 'destroy']);
+    Route::post('/filter', [ProductController::class, 'findByCategoryAndPriceRange']);
 });
 
 Route::prefix('category')->group(function () {
