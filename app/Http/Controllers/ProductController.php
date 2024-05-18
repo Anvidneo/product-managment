@@ -8,6 +8,7 @@ use App\Application\UseCases\Product\GetAllProductUseCase;
 use App\Application\UseCases\Product\GetProductByIdUseCase;
 use App\Application\UseCases\Product\UpdateProductUseCase;
 use App\Application\UseCases\Product\GetProductByCategoryOrPriceRangeUseCase;
+use App\Application\UseCases\Product\GetListOfPriceByProductsAvalibleUseCase;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -80,6 +81,20 @@ class ProductController extends Controller
     {
         try {
             return $useCase->execute($request);
+        } catch (\Throwable $th) {
+            return response(["message" => 'Internal Server Error', "error" => $th], 500);
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     * @param  \App\Models\JsonModel  $jsonModel
+     * @return \Illuminate\Http\Response
+     */
+    public function listOfPriceByProductsAvalible(GetListOfPriceByProductsAvalibleUseCase $useCase)
+    {
+        try {
+            return $useCase->execute();
         } catch (\Throwable $th) {
             return response(["message" => 'Internal Server Error', "error" => $th], 500);
         }

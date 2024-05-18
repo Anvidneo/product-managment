@@ -23,6 +23,7 @@ Route::prefix('product')->group(function () {
     Route::put('/{id}', [ProductController::class, 'update']);
     Route::delete('/{id}', [ProductController::class, 'destroy']);
     Route::post('/filter', [ProductController::class, 'findByCategoryAndPriceRange']);
+    Route::post('/list-prices/', [ProductController::class, 'listOfPriceByProductsAvalible']);
 });
 
 Route::prefix('category')->group(function () {

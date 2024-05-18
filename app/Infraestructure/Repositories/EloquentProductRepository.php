@@ -80,5 +80,14 @@ class EloquentProductRepository implements ProductRepository {
         $products->load('categories');
         return $products;
     }
+
+    public function listOfPriceByProductsAvalible() {
+        $products = Product::where('stock', '>', 0)
+                        ->select('name', 'price')
+                        ->orderBy('price')
+                        ->get();
+        
+        return $products;
+    }
     
 }

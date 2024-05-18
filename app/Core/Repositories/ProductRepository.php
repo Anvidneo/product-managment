@@ -10,5 +10,6 @@ interface ProductRepository {
     public function update($id, $productData);
     public function delete($id);
     public function filterByCategoryOrPriceRange($filter);
+    public function listOfPriceByProductsAvalible();
 
 }
