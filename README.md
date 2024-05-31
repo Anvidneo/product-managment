@@ -1,64 +1,223 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# 🧱 Prueba Arquitecura Hexagonal
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# 🚀 Instalación
+1. 🛠️ **Instalación Inicial:**
 
-## About Laravel
+    Asegúrate de tener Composer instalado. Luego, en la raíz del proyecto, ejecuta:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+    ```bash
+    composer install
+    ```
+2. 🔄 **Actualizar Dependencias:**
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+    Para actualizar las dependencias a las versiones especificadas en composer.json, usa:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+    ```bash
+    composer update
+    ```
+## 🏁 Ejecución
 
-## Learning Laravel
+1. ⚙️ **Configuración del Entorno:**
+   
+   Para correr el servicio, asegúrate de tener el archivo `.env` configurado como en `.env.example`.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+2. ▶️ **Ejecución del Proyecto:**
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+   Para ejecutar e  l proyecto, utiliza el siguiente comando:
+    ```bash
+    php artisan serve
+    ```
 
-## Laravel Sponsors
+## 📄 Documentación
+A continuación se encuentra la documentación de los endpoint pertenecientes a esta API, de igual forma existe un archivo `Products.postman_collection.json` en la raiz del proyecto el cual contiene todo lo mencionado a continuación.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## 🔐 Autenticación
+Utilice el [Login](https://github.com/Anvidneo/product-managment?tab=readme-ov-file#-login) para iniciar sesión, una vez logueado utilice el token en el resto de endpoints de la siguiente forma
+![example_use_token](image.png)
 
-### Premium Partners
+## 📦 Products
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+#### 📋 GetAllProduct
 
-## Contributing
+- **Method**: GET
+- **URL**: `http://127.0.0.1:8000/api/product/`
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+#### 📋 GetProductById
 
-## Code of Conduct
+- **Method**: GET
+- **URL**: `http://127.0.0.1:8000/api/product/1`
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+#### 📋 GetProductByCategoryOrPriceRange
 
-## Security Vulnerabilities
+- **Method**: POST
+- **URL**: `http://127.0.0.1:8000/api/product/filter`
+- **Body**:
+    ```json
+    {
+        "category": 2,
+        "minPrice": 0,
+        "maxPrice": 150000
+    }
+    ```
+#### 📋 GetListOfPriceByProductsAvalible
+- **Method:** POST
+- **URL:** `http://127.0.0.1:8000/api/product/list-prices/`
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+#### ❌ DeleteProduct
+- **Method:** DELETE
+- **URL:** `http://127.0.0.1:8000/api/product/18`
 
-## License
+#### ➕ CreateProduct
+- **Method:** POST
+- **URL:** `http://127.0.0.1:8000/api/product/`
+- **Body:**
+    ```json
+    {
+        "name": "Producto 23",
+        "price": 150000,
+        "stock": 15,
+        "categories": [1, 2, 3]
+    }
+    ```
+#### 🔄 UpdateProduct
+- **Method:** PUT
+- **URL:** http://127.0.0.1:8000/api/product/31
+- **Body:**
+    ```json
+    {
+        "name": "Producto 21 :D",
+        "price": 150000,
+        "stock": 200,
+        "categories": [1, 2, 3]
+    }
+    ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 🏷️ Categories
+
+#### 📋 GetAllCategory
+- **Method:** GET
+- **URL:** http://127.0.0.1:8000/api/category/
+
+#### 📋 GetCategoryById
+- **Method:** GET
+- **URL:** http://127.0.0.1:8000/api/category/1
+
+#### ❌ DeleteCategory
+- **Method:** DELETE
+- **URL:** http://127.0.0.1:8000/api/category/3
+
+#### ➕ CreateCategory
+- **Method:** POST
+- **URL:** http://127.0.0.1:8000/api/category/
+- **Body:**
+    ```json
+    {
+        "name": "Categoria 3"
+    }
+    ```
+
+#### 🔄 UpdateCategory
+- **Method:** PUT
+- **URL:** http://127.0.0.1:8000/api/category/1
+- **Body:**
+    ```json
+    {
+        "name": "Categoria primera 1"
+    }
+    ```
+
+## 👥 Users
+
+#### 📋 GetAllUser
+- **Method:** GET
+- **Authorization:** Bearer Token (token provided)
+- **URL:** http://127.0.0.1:8000/api/user/
+
+#### 📋 GetUserById
+- **Method:** GET
+- **Authorization:** Bearer Token (token provided)
+- **URL:** http://127.0.0.1:8000/api/user/4
+
+#### ❌ DeleteUser
+- **Method:** DELETE
+- **URL:** http://127.0.0.1:8000/api/user/3
+
+#### 🔄 UpdateUser
+- **Method:** PUT
+- **URL:** http://127.0.0.1:8000/api/user/1
+- **Body:**
+    ```json
+    {
+        "name": "juan david",
+        "email": "botero@gmail.com",
+        "password": "password"
+    }
+    ```
+
+## 🔑 Auth
+
+#### 🔑 Login
+- **Method:** POST
+- **URL:** http://127.0.0.1:8000/api/auth/login/
+- **Body:**
+    form-data
+    ```json
+    email=botero2@gmail.com
+    password=password
+    ```
+
+#### 🔒 Logout
+- **Method:** POST
+- **Authorization:** Bearer Token (token provided)
+- **URL:** http://127.0.0.1:8000/api/auth/logout/
+
+#### 🔁 Refresh
+- **Method:** POST
+- **Authorization:** Bearer Token (token provided)
+- **URL:** http://127.0.0.1:8000/api/auth/refresh/
+
+#### 📝 Register
+- **Method:** POST
+- **URL:** http://127.0.0.1:8000/api/auth/register
+- **Body:**
+    ```json
+    {
+        "name": "juan",
+        "email": "botero4@gmail.com",
+        "password": "password"
+    }
+    ```
+
+## 📚 Parte Teórica
+
+### Pregunta 1: Definición y Propósito
+
+**¿Qué es la arquitectura hexagonal y cuál es su propósito principal al ser aplicada en un proyecto de Laravel?**
+
+Es un patrón de diseño de software que tiene como objetivo separar el núcleo de la aplicación de las dependencias externas.
+
+### Pregunta 2: Componentes Claves
+
+**Enumera y describe los componentes claves de la arquitectura hexagonal:**
+
+- Núcleo de la aplicación (Casos de uso y entidades)
+  
+- Interfaces (De entrada y de salida).
+
+- Adaptadores (De entrada y de salida)
+
+### Pregunta 3: Beneficios y Desafíos
+
+**¿Cuáles son los principales beneficios de implementar una arquitectura hexagonal en Laravel?**
+
+-	Independencia de tecnologías, mantenibilidad, testeabilidad y flexibilidad.
+
+**¿Cuáles son algunos de los desafíos que podrías enfrentar al implementarla?**
+
+- •	Complejidad inicial y curva de aprendizaje.
+
+### Pregunta 4: Diferencias con MVC
+
+**Compara la arquitectura hexagonal con la arquitectura MVC tradicional. ¿En qué se diferencian principalmente en términos de estructura y flujo de datos?**
+
+- Una de sus diferencias principales es la estructura, MVC está compuesto por como sus siglas lo indican modelo, vista y controlador, en cambio Hexagonal se centra en la separación del núcleo de la app de las dependencias externas a través de puertos y adaptadores.
