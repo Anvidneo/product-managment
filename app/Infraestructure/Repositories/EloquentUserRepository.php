@@ -19,7 +19,7 @@ class EloquentUserRepository implements UserRepository {
         $user = new User([
             'name' => $userData->name,
             'email' => $userData->email,
-            'password' => $userData->password,
+            'password' => bcrypt($userData->password),
             'token' => 'token',
         ]);
 
